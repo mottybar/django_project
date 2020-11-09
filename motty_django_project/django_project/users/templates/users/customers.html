@@ -1,0 +1,112 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h5>Hi {{ user.username }}! </h5>
+    <div class="content-section">
+        <h2>Customers</h2>
+        <table>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Birth date</th>
+                <th>Join date</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Phone</th>
+                <th>Monthly discount</th>
+                <th>Pack id</th>
+              </tr>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.first_name }}</td>
+                <td>{{ customer.last_name }}</td>
+                <td>{{ customer.birth_date }}</td>
+                <td>{{ customer.join_date }}</td>
+                <td>{{ customer.city }}</td>
+                <td>{{ customer.state }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.monthly_discount }}</td>
+                <td>{{ customer.pack_id }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </br>
+        <h4>Add new customer</h4>
+        <form method="post">
+            {% csrf_token %}
+<!--            {% for field, errors in form.errors.items %}-->
+<!--                <ul class="errorlist">-->
+<!--                {% for error in errors %}-->
+<!--                    <li style="color:red">{{error}}</li>-->
+<!--                {% endfor %}-->
+<!--                </ul>-->
+<!--            {% endfor %}-->
+
+            {% if 'first_name' in form.errors.keys %}
+            <label>First name: </label><label style="color:red">{{ form.first_name.errors }}</label>
+            {% else %}
+            <label>First name: </label>
+            {% endif %}
+            <input type="text" name="first_name" value="{{form.first_name.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'last_name' in form.errors.keys %}
+            <label>Last name: </label><label style="color:red">{{ form.last_name.errors }}</label>
+            {% else %}
+            <label>Last name: </label>
+            {% endif %}
+            <input type="text" name="last_name" value="{{form.last_name.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'birth_date' in form.errors.keys %}
+            <label>Birth date: </label><label style="color:red">{{ form.birth_date.errors }}</label>
+            {% else %}
+            <label>Birth date: </label>
+            {% endif %}
+            <input type="date" name="birth_date" value="{{form.birth_date.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'join_date' in form.errors.keys %}
+            <label>Join date: </label><label style="color:red">{{ form.join_date.errors }}</label>
+             {% else %}
+            <label>Join date: </label>
+            {% endif %}
+            <input type="date" name="join_date" value="{{form.join_date.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'city' in form.errors.keys %}
+            <label>City: </label><label style="color:red">{{ form.city.errors }}</label>
+            {% else %}
+            <label>City: </label>
+            {% endif %}
+            <input type="text" name="city" value="{{form.city.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'state' in form.errors.keys %}
+            <label>State: </label><label style="color:red">{{ form.state.errors }}</label>
+            {% else %}
+            <label>State: </label>
+            {% endif %}
+            <input type="text" name="state" value="{{form.state.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'phone' in form.errors.keys %}
+            <label>Phone: </label><label style="color:red">{{ form.phone.errors }}</label>
+            {% else %}
+            <label>Phone: </label>
+            {% endif %}
+            <input type="text" name="phone" value="{{form.phone.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'monthly_discount' in form.errors.keys %}
+            <label>Monthly discount: </label><label style="color:red">{{ form.monthly_discount.errors }}</label>
+            {% else %}
+            <label>Monthly discount: </label>
+            {% endif %}
+            <input type="text" name="monthly_discount" value="{{form.monthly_discount.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            {% if 'pack_id' in form.errors.keys %}
+            <label>Pack id: </label><label style="color:red">{{ form.pack_id.errors }}</label>
+            {% else %}
+            <label>Pack id: </label>
+            {% endif %}
+            <input type="text" name="pack_id" value="{{form.pack_id.value|default_if_none:''}}" class="textinput textInput form-control"/>
+
+            <input type="submit" value="Add">
+        </form>
+
+    </div>
+{% endblock content %}
